@@ -1,0 +1,13 @@
+{
+    "name": "Example Application",
+    "description": "This is an example of OVH APIs wrapper usage",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/carsso/php-ovh"
+        }
+    ],
+    "require": {
+        "ovh/ovh": "dev-master"
+    }
+}

@@ -1,0 +1,46 @@
+<div class="navbar">
+<a data-toggle="collapse" data-target="#navbar-4" class="navbar-item pull-right hidden-md-up m-a-0 m-l">
+    <i class="material-icons">&#xe5d2;</i>
+</a>
+<div ui-include="'../views/navbar.brand.html'"></div>
+<ul class="nav navbar-nav pull-right" ng-show="me.email">
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown">
+            <i class="material-icons">&#xe5c3;</i>
+        </a>
+        <div class="dropdown-menu w-xxl text-color pull-right p-a-0 animated flipInX">
+            <div>
+                <div class="row no-gutter text-primary-hover" ng-repeat="(pccName, pcc) in pccs">
+                    <div ng-repeat="(datacenterId, datacenter) in pcc.datacenters">
+                        <div class="col-xs-12 b-r b-b">
+                            <a class="p-a block text-left" ui-sref="pccDc({ pccName: pccName, datacenterId: datacenterId })">
+                                <i class="material-icons md-24 text-muted m-v-sm">&#xe2c2;</i> 
+                                <span class="p-l">{{pccName}} - {{datacenter.name}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle clear" data-toggle="dropdown" title="{{me.firstname}} {{me.name}}">
+            <span class="avatar w-32">
+                <img src="https://www.gravatar.com/avatar/{{ me.email | gravatar }}" alt="...">
+            </span>
+        </a>
+        <div class="dropdown-menu pull-right dropdown-menu-scale ng-scope">
+            <a class="dropdown-item" ui-sref="logout()">Logout</a>
+        </div>
+    </li>
+</ul>
+<div class="collapse navbar-toggleable-sm" id="navbar-4">
+    <ul class="nav navbar-nav pull-left nav-active-border b-primary">
+        <li class="nav-item">
+            <a class="nav-link" ui-sref-active="active" ui-sref="pcc()">
+                <span class="nav-text">Dashboard</span>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
