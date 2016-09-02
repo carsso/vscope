@@ -31,8 +31,13 @@
             templateUrl: 'views/dashboard.html',
             controller: 'DcCtrl' 
         })
+        .state('pccPcc', {
+            url: '/pcc/{pccName:string}',
+            templateUrl: 'views/dashboard.html',
+            controller: 'DcCtrl' 
+        })
         .state('pccDc', {
-            url: '/pcc/{pccName:string}/datacenter/{datacenterId:int}',
+            url: '/pcc/{pccName:string}/datacenter_{datacenterId:int}',
             templateUrl: 'views/dashboard.html',
             controller: 'DcCtrl' 
         })

@@ -117,27 +117,20 @@
                         vm.virtualmachines.push(virtualmachine.value);
                     }
                 });
-                /*for (var i = 0; i < virtualmachineIds.length; i++) {
-                    var virtualmachineId = virtualmachineIds[i];
-                    loadVirtualMachine(pccName, datacenterId, virtualmachineId);
-                }*/
             });
         }
-        /*
-        function loadVirtualMachine(pccName, datacenterId, virtualmachineId) {
-            $http.get('/ovhapi/dedicatedCloud/'+pccName+'/datacenter/'+datacenterId+'/vm/'+virtualmachineId).success(function(virtualmachine) {
-                vm.virtualmachines.push(virtualmachine);
-            });
-        }
-        */
 
         function initialize() {
             loadMe();
-            loadPccs();
-            if(vm.pccName && vm.datacenterId) {
-                loadHosts(vm.pccName, vm.datacenterId);
-                loadDatastores(vm.pccName, vm.datacenterId);
-                loadVirtualMachines(vm.pccName, vm.datacenterId);
+            if(vm.pccName) {
+                loadPcc(vm.pccName);
+                if(vm.datacenterId) {
+                    loadHosts(vm.pccName, vm.datacenterId);
+                    loadDatastores(vm.pccName, vm.datacenterId);
+                    loadVirtualMachines(vm.pccName, vm.datacenterId);
+                }
+            } else {
+                loadPccs();
             }
         }
         initialize();
