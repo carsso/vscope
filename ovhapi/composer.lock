@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5d503564c4796e27a563d116e287178c",
-    "content-hash": "513993d18c9462706645a3f006c0d28f",
+    "hash": "81807bea162150fbfe3464d60d5fbeff",
+    "content-hash": "6855445bb74b8eeccb339137fb328a8b",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -183,13 +183,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/carsso/php-ovh.git",
-                "reference": "234d0e3e51eda4c49b83fd14817f8e265d5208a3"
+                "url": "https://github.com/ovh/php-ovh.git",
+                "reference": "01d233b910bb684123307750f04343b968bc2b2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carsso/php-ovh/zipball/234d0e3e51eda4c49b83fd14817f8e265d5208a3",
-                "reference": "234d0e3e51eda4c49b83fd14817f8e265d5208a3",
+                "url": "https://api.github.com/repos/ovh/php-ovh/zipball/01d233b910bb684123307750f04343b968bc2b2f",
+                "reference": "01d233b910bb684123307750f04343b968bc2b2f",
                 "shasum": ""
             },
             "require": {
@@ -207,14 +207,12 @@
                     "Ovh\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "description": "Wrapper for OVH APIs",
-            "support": {
-                "source": "https://github.com/carsso/php-ovh/tree/master"
-            },
-            "time": "2016-09-01 09:43:57"
+            "time": "2016-09-03 19:18:47"
         },
         {
             "name": "psr/http-message",
