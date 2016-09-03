@@ -40,6 +40,31 @@
         vm.datastores = [];
         vm.virtualmachines = [];
        
+        vm.serviceDescription = function(commercialRange) {
+            var serviceDescription = 'Private Cloud ???';
+            if(/^2016v\dInfrastructure$/.test(commercialRange)) {
+                serviceDescription = 'Private Cloud : SDDC';
+            } else if(/^2016v\dEnterprise$/.test(commercialRange)) {
+                serviceDescription = 'Private Cloud : Dedicated Cloud';
+            } else if(/^2014v\dInfrastructure$/.test(commercialRange)) {
+                serviceDescription = 'Dedicated Cloud : Infrastructure';
+            } else if(/^2014v\dEnterprise$/.test(commercialRange)) {
+                serviceDescription = 'Dedicated Cloud : Enterprise';
+            } else if(/^2013v\d$/.test(commercialRange)) {
+                serviceDescription = 'Dedicated Cloud';
+            }
+
+            if(/^2016v2/.test(commercialRange)) {
+                serviceDescription += ' (with NSX)';
+            } else if(/^2016v3/.test(commercialRange)) {
+                serviceDescription += ' (with vROps)';
+            } else if(/^2016v4/.test(commercialRange)) {
+                serviceDescription += ' (with NSX and vROps)';
+            }
+
+            return serviceDescription;
+        }
+
         function loadMe() {
             $http.get('/ovhapi/me').success(function(me) {
                 $rootScope.me = me;

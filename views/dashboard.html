@@ -10,7 +10,7 @@
 <div class="padding">
     <div class="row">
         <div ng-repeat="(pccName, pcc) in pccs">
-            <div class="col-xs-12 col-sm-4" ng-repeat="(datacenterId, datacenter) in pcc.datacenters">
+            <div class="col-xs-12 col-sm-6" ng-repeat="(datacenterId, datacenter) in pcc.datacenters">
                 <div class="box p-a">
                     <div class="pull-left m-r">
                         <span class="w-48 rounded accent"><i class="material-icons">&#xe2c2;</i></span>
@@ -18,9 +18,9 @@
                     <a class="block clear" ui-sref="pccDc({ pccName: pccName, datacenterId: datacenterId })">
                         <h4 class="m-a-0 text-lg _300">{{pccName}} - {{datacenter.name}}</h4>
                         <small class="text-muted">
-                            {{pcc.managementInterface}} {{datacenter.version}}<br />
-                            {{pcc.description}}<br />
-                            {{datacenter.description}}
+                            {{serviceDescription(datacenter.commercialRangeName)}} - {{pcc.managementInterface}} {{datacenter.version}}&nbsp;<br />
+                            {{pcc.description}}&nbsp;<br />
+                            {{datacenter.description}}&nbsp;
                         </small>
                     </a>
                 </div>
@@ -33,14 +33,17 @@
     <div class="p-a white lt box-shadow ng-scope">
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="m-b-0 _300 ng-binding">
-                    {{pccName}} - {{pccs[pccName].managementInterface}} {{pccs[pccName].datacenters[datacenterId].version}} - {{pccs[pccName].commercialRange}} <br />
-                </h4>
-                <small class="text-muted">
-                    {{pccs[pccName].description}}<br />
-                    {{pccs[pccName].datacenters[datacenterId].name}} - {{pccs[pccName].datacenters[datacenterId].commercialRangeName}}
-                    {{pccs[pccName].datacenters[datacenterId].description}}
-                </small>
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded accent"><i class="material-icons">&#xe2c2;</i></span>
+                </div>
+                <div class="block clear">
+                    <h4 class="m-b-0 _300 ng-binding">{{pccName}} - {{pccs[pccName].datacenters[datacenterId].name}}</h4>
+                    <small class="text-muted">
+                        {{serviceDescription(pccs[pccName].datacenters[datacenterId].commercialRangeName)}} - {{pccs[pccName].managementInterface}} {{pccs[pccName].datacenters[datacenterId].version}}&nbsp;<br />
+                        {{pccs[pccName].description}}&nbsp;<br />
+                        {{pccs[pccName].datacenters[datacenterId].description}}&nbsp;
+                    </small>
+                </div>
             </div>
         </div>
     </div>
