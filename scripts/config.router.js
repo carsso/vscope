@@ -41,6 +41,11 @@
             templateUrl: 'views/dashboard.html',
             controller: 'DcCtrl' 
         })
+        .state('app', {
+            url: '/app',
+            templateUrl: 'views/app.html',
+            controller: 'AppCtrl' 
+        })
         .state('logout', {
             url: '/logout',
             templateUrl: 'views/dashboard.html',

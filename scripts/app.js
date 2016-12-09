@@ -16,6 +16,7 @@
         'ngTouch',
         'ngStorage',
         'ngStore',
+        'ngCookies',
         'ui.router',
         'ui.utils',
         'ui.load',

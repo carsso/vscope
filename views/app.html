@@ -1,0 +1,47 @@
+<div class="p-a white lt box-shadow ng-scope">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="m-b-0 _300 ng-binding">vScope</h4>
+            <small class="text-muted">Application details</small>
+        </div>
+    </div>
+</div>
+<div class="padding" ng-controller="LoginCtrl">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box p-a text-center">
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Application name</label>
+                    <div class="col-sm-9">
+                        <div class="form-control" disabled="disabled">{{application.name}}</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Application description</label>
+                    <div class="col-sm-9">
+                        <div class="form-control" disabled="disabled">{{application.description}}</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Application key</label>
+                    <div class="col-sm-9">
+                        <div class="form-control" disabled="disabled">{{tokenCookies.AK}}</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Application secret</label>
+                    <div class="col-sm-9">
+                        <div class="form-control" disabled="disabled">{{tokenCookies.AS}}</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Consumer key</label>
+                    <div class="col-sm-9">
+                        <div class="form-control" disabled="disabled">{{tokenCookies.CK}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -2,11 +2,20 @@
 <a data-toggle="collapse" data-target="#navbar-4" class="navbar-item pull-right hidden-md-up m-a-0 m-l">
     <i class="material-icons">&#xe5d2;</i>
 </a>
-<div ui-include="'../views/navbar.brand.html'"></div>
-<ul class="nav navbar-nav pull-right" ng-show="me.email">
+<div>
+    <a class="navbar-brand" ui-sref="pcc()" ng-if="(pccs | toArray:true).length">
+        <img src="../assets/images/logo.png" alt="vScope">
+        <span class="hidden-folded inline">vScope</span>
+    </a>
+    <a class="navbar-brand" ui-sref="homepage()" ng-if="!(pccs | toArray:true).length">
+        <img src="../assets/images/logo.png" alt="vScope">
+        <span class="hidden-folded inline">vScope</span>
+    </a>
+</div>
+<ul class="nav navbar-nav pull-right" ng-show="(pccs | toArray:true).length">
     <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown">
-            <i class="material-icons">&#xe5c3;</i>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons">&#xe2c2;</i>
         </a>
         <div class="dropdown-menu w-xxl text-color pull-right p-a-0 animated flipInX">
             <div>
@@ -26,18 +35,19 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle clear" data-toggle="dropdown" title="{{me.firstname}} {{me.name}}">
             <span class="avatar w-32">
-                <img src="https://www.gravatar.com/avatar/{{ me.email | gravatar }}" alt="...">
+                <img src="https://www.gravatar.com/avatar/{{ me.email | gravatar }}?d=mm" alt="...">
             </span>
         </a>
         <div class="dropdown-menu pull-right dropdown-menu-scale ng-scope">
+            <a class="dropdown-item" ui-sref="app()">Application details</a>
             <a class="dropdown-item" ui-sref="logout()">Logout</a>
         </div>
     </li>
 </ul>
 <div class="collapse navbar-toggleable-sm" id="navbar-4">
     <ul class="nav navbar-nav pull-left nav-active-border b-primary">
-        <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="pcc()">
+        <li class="nav-item" ng-if="(pccs | toArray:true).length">
+            <a class="nav-link" ui-sref="pcc()">
                 <span class="nav-text">Dashboard</span>
             </a>
         </li>

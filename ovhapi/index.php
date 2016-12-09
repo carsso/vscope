@@ -7,17 +7,28 @@ if(isset($_GET['url']))
 {
     if($_GET['url'] == 'login')
     {
+        if(isset($_GET['restricted']))
+        {
+            $rights = array( (object) [
+                'method'    => 'GET',
+                'path'      => '/dedicatedCloud*'
+            ]);
+        }
         $conn = new Api(    $applicationKey,
                             $applicationSecret,
                             $endpoint);
         $credentials = $conn->requestCredentials($rights, $redirection);
         setcookie('consumerKey', $credentials["consumerKey"], time()+3600*24*365, '/');
+        setcookie('applicationKey', '', time()-1000, '/');
+        setcookie('applicationSecret', '', time()-1000, '/');
         header('Location: '. $credentials["validationUrl"]);
         exit(0);
     }
     elseif($_GET['url'] == 'logout')
     {
         setcookie('consumerKey', '', time()-1000, '/');
+        setcookie('applicationKey', '', time()-1000, '/');
+        setcookie('applicationSecret', '', time()-1000, '/');
         header('location: '. $redirection);
         exit(0);
     }
@@ -26,6 +37,14 @@ $consumerKey = null;
 if(isset($_COOKIE['consumerKey']))
 {
     $consumerKey = $_COOKIE['consumerKey'];
+}
+if(isset($_COOKIE['applicationKey']))
+{
+    $applicationKey = $_COOKIE['applicationKey'];
+}
+if(isset($_COOKIE['applicationSecret']))
+{
+    $applicationSecret = $_COOKIE['applicationSecret'];
 }
 if($consumerKey)
 {

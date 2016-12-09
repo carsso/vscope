@@ -4,13 +4,21 @@ use \Ovh\Api;
 
 if(isset($_COOKIE['consumerKey']))
 {
+    if(isset($_COOKIE['applicationKey']) and $_COOKIE['applicationKey'])
+    {
+        $applicationKey = $_COOKIE['applicationKey'];
+    }
+    if(isset($_COOKIE['applicationSecret']) and $_COOKIE['applicationSecret'])
+    {
+        $applicationSecret = $_COOKIE['applicationSecret'];
+    }
     $consumerKey = $_COOKIE['consumerKey'];
     try {
         $conn = new Api($applicationKey,
             $applicationSecret,
             $endpoint,
             $consumerKey);
-        $conn->get('/me');
+        $conn->get('/dedicatedCloud');
     } catch (GuzzleHttp\Exception\ClientException $exception) {
         header('Location: /ovhapi/logout');
         exit(0);
@@ -75,6 +83,7 @@ else
 <!-- Angular -->
   <script src="/libs/angular/angular/angular.js"></script>
   <script src="/libs/angular/angular-animate/angular-animate.js"></script>
+  <script src="/libs/angular/angular-cookies/angular-cookies.js"></script>
   <script src="/libs/angular/angular-resource/angular-resource.js"></script>
   <script src="/libs/angular/angular-sanitize/angular-sanitize.js"></script>
   <script src="/libs/angular/angular-touch/angular-touch.js"></script>
@@ -104,6 +113,7 @@ else
   <script src="/scripts/directives/ui-include.js"></script>
 
   <script src="/scripts/filters/fromnow.js"></script>
+  <script src="/scripts/filters/toarray.js"></script>
   <script src="/scripts/filters/keylength.js"></script>
 
   <script src="/scripts/services/ngstore.js"></script>
