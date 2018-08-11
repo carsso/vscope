@@ -272,15 +272,15 @@
                                         <i class="fa" ng-class="getVirtualMachineVmwareToolsData('icon', virtualmachine)"></i>
                                     </span>
                                 </td>
-                                <td title="Backup : {{virtualmachine.backupJob.state || 'removed'}} - Restore points : {{(virtualmachine.backupJob.restorePoints | toArray:true).length || 0}}">
+                                <td title="Backup : {{virtualmachine.backup.state || 'removed'}} - Restore points : {{(virtualmachine.backup.restorePoints | toArray:true).length || 0}}">
                                     <span class="label" ng-class="getVirtualMachineBackupClass(virtualmachine)">
                                         <i class="fa" ng-class="getVirtualMachineBackupIcon(virtualmachine)"></i> 
-                                        <span ng-if="virtualmachine.backupJob && virtualmachine.backupJob.state != 'removed'">
-                                            <span ng-if="virtualmachine.backupJob.restorePoints == null">
+                                        <span ng-if="virtualmachine.backup && virtualmachine.backup.state != 'removed'">
+                                            <span ng-if="virtualmachine.backup.restorePoints == null">
                                                 ...
                                             </span> 
-                                            <span ng-if="virtualmachine.backupJob.restorePoints != null">
-                                                {{(virtualmachine.backupJob.restorePoints | toArray).length}}
+                                            <span ng-if="virtualmachine.backup.restorePoints != null">
+                                                {{(virtualmachine.backup.restorePoints | toArray).length}}
                                             </span>
                                         </span> 
                                     </span>

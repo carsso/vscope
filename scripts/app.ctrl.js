@@ -197,31 +197,7 @@
                         var virtualmachine = virtualmachines[i].value;
                         var vmId = virtualmachine.vmId;
                         $scope.virtualmachines[vmId] = virtualmachine;
-                        $scope.virtualmachines[vmId]['backupJob'] = null;
-                        loadVirtualMachineBackup(pccName, datacenterId, vmId);
                     }
-                });
-            });
-        }
-
-        function loadVirtualMachineBackup(pccName, datacenterId, vmId) {
-            $http.get('/ovhapi/dedicatedCloud/'+pccName+'/datacenter/'+datacenterId+'/vm/'+vmId+'/backupJob').success(function(virtualmachineBackupJob) {
-                $scope.virtualmachines[vmId]['backupJob'] = virtualmachineBackupJob;
-                $http.get('/ovhapi/dedicatedCloud/'+pccName+'/datacenter/'+datacenterId+'/vm/'+vmId+'/backupJob/restorePoints').success(function(restorePointsIds) {
-                    $scope.virtualmachines[vmId]['backupJob']['restorePoints'] = {};
-                    for (var i = 0; i < restorePointsIds.length; i++) {
-                        var restorePointId = restorePointsIds[i];
-                        $scope.virtualmachines[vmId]['backupJob']['restorePoints'][restorePointId] = { 'msg': 'Object not retrieved for performance reasons' };
-                    }
-                    return ;
-                    $http.get('/ovhapi/dedicatedCloud/'+pccName+'/datacenter/'+datacenterId+'/vm/'+vmId+'/backupJob/restorePoints/'+restorePointsIds.join(','), {headers:{'X-OVH-BATCH':','}}).success(function(restorePoints) {
-                        $scope.virtualmachines[vmId]['backupJob']['restorePoints'] = {};
-                        for (var i = 0; i < restorePoints.length; i++) {
-                            var restorePoint = restorePoints[i].value;
-                            var restorePointId = restorePoint.restorePointId;
-                            $scope.virtualmachines[vmId]['backupJob']['restorePoints'][restorePointId] = restorePoint;
-                        }
-                    });
                 });
             });
         }
@@ -435,13 +411,13 @@
 
         $scope.getVirtualMachineBackupClass = function(virtualmachine) {
             var resultClass = '';
-            if(virtualmachine.backupJob) {
-                if(virtualmachine.backupJob.state) {
-                    if(virtualmachine.backupJob.state == 'delivered') {
+            if(virtualmachine.backup) {
+                if(virtualmachine.backup.state) {
+                    if(virtualmachine.backup.state == 'delivered') {
                         resultClass = 'green';
-                    } else if(virtualmachine.backupJob.state == 'removed') {
+                    } else if(virtualmachine.backup.state == 'removed') {
                         resultClass = 'warn';
-                    } else if(virtualmachine.backupJob.state == 'disabled') {
+                    } else if(virtualmachine.backup.state == 'disabled') {
                         resultClass = 'red';
                     } else {
                         resultClass = 'red';
@@ -455,13 +431,13 @@
 
         $scope.getVirtualMachineBackupIcon = function(virtualmachine) {
             var resultClass = 'fa-question-circle';
-            if(virtualmachine.backupJob) {
-                if(virtualmachine.backupJob.state) {
-                    if(virtualmachine.backupJob.state == 'delivered') {
+            if(virtualmachine.backup) {
+                if(virtualmachine.backup.state) {
+                    if(virtualmachine.backup.state == 'delivered') {
                         resultClass = 'fa-check';
-                    } else if(virtualmachine.backupJob.state == 'removed') {
+                    } else if(virtualmachine.backup.state == 'removed') {
                         resultClass = 'fa-exclamation-triangle';
-                    } else if(virtualmachine.backupJob.state == 'disabled') {
+                    } else if(virtualmachine.backup.state == 'disabled') {
                         resultClass = 'fa-times';
                     } else {
                         resultClass = 'fa-times';
