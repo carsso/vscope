@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h4 class="m-b-0 _300 ng-binding">vScope</h4>
-            <small class="text-muted">Choose your Dedicated Cloud datacenter</small>
+            <small class="text-muted">Choose your Private Cloud datacenter</small>
         </div>
     </div>
 </div>
@@ -24,6 +24,14 @@
                         </small>
                     </a>
                 </div>
+            </div>
+        </div>
+        <div ng-if="!(pccs | toArray:true).length">
+            <div class="col-xs-12 col-sm-12">
+                <h4 class="m-a-0 text-lg _300">No Private Cloud</h4>
+                <small class="text-muted">
+                    No Private Cloud found on this OVH account 
+                </small>
             </div>
         </div>
     </div>
