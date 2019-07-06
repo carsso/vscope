@@ -1,23 +1,28 @@
 <?php
-require __DIR__ . '/ovhapi/config.php';
+require __DIR__.'/ovhapi/vendor/autoload.php';
+require __DIR__.'/ovhapi/config.php';
 use \Ovh\Api;
 
 if(isset($_COOKIE['consumerKey']))
 {
-    if(isset($_COOKIE['applicationKey']) and $_COOKIE['applicationKey'])
-    {
-        $applicationKey = $_COOKIE['applicationKey'];
+    $configNames = array(
+        'endpoint',
+        'applicationKey',
+        'applicationSecret',
+        'consumerKey',
+    );
+    
+    foreach($configNames as $configName) {
+        if(isset($_COOKIE[$configName]) and $_COOKIE[$configName]) {
+            $config[$configName] = $_COOKIE[$configName];
+        }
     }
-    if(isset($_COOKIE['applicationSecret']) and $_COOKIE['applicationSecret'])
-    {
-        $applicationSecret = $_COOKIE['applicationSecret'];
-    }
-    $consumerKey = $_COOKIE['consumerKey'];
+
     try {
-        $conn = new Api($applicationKey,
-            $applicationSecret,
-            $endpoint,
-            $consumerKey);
+        $conn = new Api($config['applicationKey'],
+            $config['applicationSecret'],
+            $config['endpoint'],
+            $config['consumerKey']);
         $conn->get('/dedicatedCloud');
     } catch (GuzzleHttp\Exception\ClientException $exception) {
         header('Location: /ovhapi/logout');
