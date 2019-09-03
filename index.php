@@ -120,6 +120,7 @@ else
   <script src="/scripts/filters/fromnow.js"></script>
   <script src="/scripts/filters/toarray.js"></script>
   <script src="/scripts/filters/keylength.js"></script>
+  <script src="/scripts/filters/round.js"></script>
 
   <script src="/scripts/services/ngstore.js"></script>
   <script src="/scripts/services/ui-load.js"></script>

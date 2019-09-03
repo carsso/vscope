@@ -76,7 +76,7 @@
                                         },
                                         title:{textStyle:{color:'#ccc',fontSize:12}},
                                         detail:{formatter:'{value} %',textStyle:{fontSize:24,}},
-                                        data:[{value:{{gaugesValues('datastores-usage')|number:0}},name:'Space usage'}]
+                                        data:[{value:{{gaugesValues('datastores-usage') | round: 0}},name:'Space usage'}]
                                     }]
                                 }" style="height:220px"></div>
                             </div>
@@ -93,7 +93,7 @@
                                         },
                                         title:{textStyle:{color:'#ccc',fontSize:12}},
                                         detail:{formatter:'{value} %',textStyle:{fontSize:24,}},
-                                        data:[{value:{{gaugesValues('datastores-provisionned')|number:0}},name:'Space provisionned'}]
+                                        data:[{value:{{gaugesValues('datastores-provisionned') | round: 0}},name:'Space provisionned'}]
                                     }]
                                 }" style="height:220px"></div>
                             </div>
@@ -126,9 +126,9 @@
                                 <td><small>{{datastore.billingType}}</small></td>
                                 <td>{{datastore.vmTotal}}</td>
                                 <td>
-                                    <div ng-if="datastore.size.unit" title="Provisionned : {{datastore.spaceProvisionned | number : 0}} of {{(datastore.spaceUsed + datastore.spaceFree) | number : 0}} {{datastore.size.unit}}">
-                                        <div ui-jp="sparkline" ui-refresh="datastore.spaceFree" ui-options="[ {{datastore.spaceFree | number : 2}}, {{datastore.spaceUsed | number : 2}} ], {type:'pie', height:19, sliceColors:['#cccccc','#fcc100']}" class="sparkline inline"></div>
-                                        {{datastore.spaceUsed | number : 0}} <small>of</small> {{(datastore.spaceUsed + datastore.spaceFree) | number : 0}} <small>{{datastore.size.unit}}</small>
+                                    <div ng-if="datastore.size.unit" title="Provisionned : {{datastore.spaceProvisionned | round: 0}} of {{(datastore.spaceUsed + datastore.spaceFree) | round: 0}} {{datastore.size.unit}}">
+                                        <div ui-jp="sparkline" ui-refresh="datastore.spaceFree" ui-options="[ {{datastore.spaceFree | round: 0}}, {{datastore.spaceUsed | round: 0}} ], {type:'pie', height:19, sliceColors:['#cccccc','#fcc100']}" class="sparkline inline"></div>
+                                        {{datastore.spaceUsed | round: 0}} <small>of</small> {{(datastore.spaceUsed + datastore.spaceFree) | round: 0}} <small>{{datastore.size.unit}}</small>
                                     </div>
                                 </td>
                             </tr>
@@ -155,7 +155,7 @@
                                         },
                                         title:{textStyle:{color:'#ccc',fontSize:12}},
                                         detail:{formatter:'{value} %',textStyle:{fontSize:24,}},
-                                        data:[{value:{{gaugesValues('hosts-cpu')|number:0}},name:'CPU usage'}]
+                                        data:[{value:{{gaugesValues('hosts-cpu') | round: 0}},name:'CPU usage'}]
                                     }]
                                 }" style="height:220px"></div>
                             </div>
@@ -172,7 +172,7 @@
                                         },
                                         title:{textStyle:{color:'#ccc',fontSize:12}},
                                         detail:{formatter:'{value} %',textStyle:{fontSize:24,}},
-                                        data:[{value:{{gaugesValues('hosts-ram')|number:0}},name:'RAM usage'}]
+                                        data:[{value:{{gaugesValues('hosts-ram') | round: 0}},name:'RAM usage'}]
                                     }]
                                 }" style="height:220px"></div>
                             </div>
@@ -206,14 +206,14 @@
                                 <td>{{host.vmTotal}}</td>
                                 <td>
                                     <div ng-if="host.cpuMax">
-                                        <div ui-jp="sparkline" ui-refresh="host.cpuUsed" ui-options="[ {{((host.cpuMax/1000)-(host.cpuUsed/1000)) | number : 2}}, {{(host.cpuUsed/1000) | number : 2}} ], {type:'pie', height:19, sliceColors:['#cccccc','#fcc100']}" class="sparkline inline"></div>
-                                        {{host.cpuUsed/1000 | number : 1}} <small>of</small> {{host.cpuMax/1000 | number : 0}} <small>{{host.cpu.unit}}</small>
+                                        <div ui-jp="sparkline" ui-refresh="host.cpuUsed" ui-options="[ {{((host.cpuMax/1000)-(host.cpuUsed/1000)) | round: 1}}, {{(host.cpuUsed/1000) | round: 1}} ], {type:'pie', height:19, sliceColors:['#cccccc','#fcc100']}" class="sparkline inline"></div>
+                                        {{host.cpuUsed/1000 | round: 1}} <small>of</small> {{host.cpuMax/1000 | round: 0}} <small>{{host.cpu.unit}}</small>
                                     </div>
                                 </td>
                                 <td>
                                     <div ng-if="host.memoryUsed">
-                                        <div ui-jp="sparkline" ui-refresh="host.memoryUsed" ui-options="[ {{(host.ram.value-(host.memoryUsed/1024)) | number : 2}}, {{(host.memoryUsed/1024) | number : 2}} ], {type:'pie', height:19, sliceColors:['#cccccc','#fcc100']}" class="sparkline inline"></div>
-                                        {{host.memoryUsed/1024 | number : 0}} <small>of</small> {{host.ram.value | number : 0}} <small>{{host.ram.unit}}</small>
+                                        <div ui-jp="sparkline" ui-refresh="host.memoryUsed" ui-options="[ {{(host.ram.value-(host.memoryUsed/1024)) | round: 0}}, {{(host.memoryUsed/1024) | round: 0}} ], {type:'pie', height:19, sliceColors:['#cccccc','#fcc100']}" class="sparkline inline"></div>
+                                        {{host.memoryUsed/1024 | round: 0}} <small>of</small> {{host.ram.value | round: 0}} <small>{{host.ram.unit}}</small>
                                     </div>
                                 </td>
                             </tr>
@@ -257,6 +257,7 @@
                                 <td title="State : {{virtualmachine.powerState}} - MoRef : {{virtualmachine.moRef}}">
                                     <i class="fa fa-circle" ng-class="getVirtualMachineStateClass(virtualmachine)" title=""></i> &nbsp;
                                     {{ virtualmachine.name }}
+                                    <span class="label lightgrey" ng-show="isOvhVm(virtualmachine)" title="This virtual machine is managed by OVH">OVH VM</span>
                                 </td>
                                 <td colspan="4" ng-if="virtualmachine.powerState == 'deleted'" class="text-center text-black-lt">
                                     <i>Virtual machine removed</i>
@@ -266,8 +267,8 @@
                                 </td>
                                 <td ng-if="virtualmachine.powerState != 'deleted'">
                                     <div ng-if="virtualmachine.filers" ng-repeat="filer in virtualmachine.filers | orderBy:'name'" class="inline m-r">
-                                        <div ng-repeat="disk in filer.disks" class="inline" ng-if="disk.capacity" title="Filer {{(filer.name.substring(0, 13) == 'storageLocal_')?'local':filer.name}} : {{filer.committed/1024 | number : 1}} of {{disk.capacity/1024 | number : 0}} GB">
-                                            <div ui-jp="sparkline" ui-refresh="disk.capacity" ui-options="[ {{(filer.committed/1024) | number : 2}}, {{((disk.capacity/1024)-(filer.committed/1024)) | number : 2}} ], {type:'pie', height:19, sliceColors:['#fcc100','#cccccc']}" class="sparkline inline"></div>
+                                        <div ng-repeat="disk in filer.disks" class="inline" ng-if="disk.capacity" title="Filer {{(filer.name.substring(0, 13) == 'storageLocal_')?'local':filer.name}} : {{filer.committed/1024 | round: 1}} of {{disk.capacity/1024 | round: 0}} GB">
+                                            <div ui-jp="sparkline" ui-refresh="disk.capacity" ui-options="[ {{(filer.committed/1024) | round: 1}}, {{((disk.capacity/1024)-(filer.committed/1024)) | round: 1}} ], {type:'pie', height:19, sliceColors:['#fcc100','#cccccc']}" class="sparkline inline"></div>
                                             <small>{{(filer.name.substring(0, 13) == 'storageLocal_')?'local':filer.name}}</small>
                                         </div>
                                     </div>
@@ -299,31 +300,31 @@
                                 <td ng-if="virtualmachine.powerState != 'deleted'" title="Fault Tolerance : {{virtualmachine.stateFt}}">
                                     <i class="fa fa-circle" ng-class="getVirtualMachineFtClass(virtualmachine)"></i>
                                 </td>
-                                <td title="RAM usage : {{virtualmachine.memoryUsed/1024 | number : 2}} of {{virtualmachine.memoryMax/1024 | number : 0}} GB" ng-if="virtualmachine.powerState != 'deleted'">
-                                    <div ui-jp="sparkline" ui-refresh="virtualmachine.memoryUsed" ui-options="[ {{(virtualmachine.memoryUsed/1024) | number : 2}}, {{((virtualmachine.memoryMax/1024)-(virtualmachine.memoryUsed/1024)) | number : 2}} ], {type:'pie', height:19, sliceColors:['#fcc100','#cccccc']}" class="sparkline inline"></div>
-                                    {{virtualmachine.memoryMax/1024 | number : 0}} <small>GB</small>
+                                <td title="RAM usage : {{virtualmachine.memoryUsed/1024 | round: 2}} of {{virtualmachine.memoryMax/1024 | round: 0}} GB" ng-if="virtualmachine.powerState != 'deleted'">
+                                    <div ui-jp="sparkline" ui-refresh="virtualmachine.memoryUsed" ui-options="[ {{(virtualmachine.memoryUsed/1024) | round: 2}}, {{((virtualmachine.memoryMax/1024)-(virtualmachine.memoryUsed/1024)) | round: 2}} ], {type:'pie', height:19, sliceColors:['#fcc100','#cccccc']}" class="sparkline inline"></div>
+                                    {{virtualmachine.memoryMax/1024 | round: 0}} <small>GB</small>
                                 </td>
                                 <td ng-if="virtualmachine.powerState != 'deleted'">
                                     {{virtualmachine.cpuNum}} <small>vCPU</small>
                                 </td>
-                                <td title="CPU usage : {{virtualmachine.cpuUsed/1000 | number : 2}} of {{virtualmachine.cpuMax/1000 | number : 1}} GHz" ng-if="virtualmachine.powerState != 'deleted'">
-                                    <div ui-jp="sparkline" ui-refresh="virtualmachine.cpuUsed" ui-options="[ {{(virtualmachine.cpuUsed/1000) | number : 2}}, {{((virtualmachine.cpuMax/1000)-(virtualmachine.cpuUsed/1000)) | number : 2}} ], {type:'pie', height:19, sliceColors:['#fcc100','#cccccc']}" class="sparkline inline"></div>
-                                    {{virtualmachine.cpuUsed/1000 | number : 1}} <small>GHz</small>
+                                <td title="CPU usage : {{virtualmachine.cpuUsed/1000 | round: 2}} of {{virtualmachine.cpuMax/1000 | round: 1}} GHz" ng-if="virtualmachine.powerState != 'deleted'">
+                                    <div ui-jp="sparkline" ui-refresh="virtualmachine.cpuUsed" ui-options="[ {{(virtualmachine.cpuUsed/1000) | round: 2}}, {{((virtualmachine.cpuMax/1000)-(virtualmachine.cpuUsed/1000)) | round: 2}} ], {type:'pie', height:19, sliceColors:['#fcc100','#cccccc']}" class="sparkline inline"></div>
+                                    {{virtualmachine.cpuUsed/1000 | round: 1}} <small>GHz</small>
                                 </td>
                                 <td title="CPU Ready : {{virtualmachine.cpuReady}} ms ({{virtualmachine.cpuReadyPercent}} %)" ng-class="(virtualmachine.cpuReadyPercent<3)?'text-primary':'text-warn'" ng-if="virtualmachine.powerState != 'deleted'">
-                                    {{virtualmachine.cpuReady | number: 0}} <small>ms</small>
+                                    {{virtualmachine.cpuReady | round: 0}} <small>ms</small>
                                 </td>
-                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.netTx/100 | number : 1}} MBps / {{virtualmachine.netRx/100 | number : 1}} MBps">
-                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.netTx/100 | number : 1}} / {{virtualmachine.netRx/100 | number : 1}} <i class="fa fa-caret-down"></i> <small>MBps</small></small>
+                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.netTx/100 | round: 1}} MBps / {{virtualmachine.netRx/100 | round: 1}} MBps">
+                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.netTx/100 | round: 1}} / {{virtualmachine.netRx/100 | round: 1}} <i class="fa fa-caret-down"></i> <small>MBps</small></small>
                                 </td>
-                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.readRate/100 | number : 1}} MBps / {{virtualmachine.writeRate/100 | number : 1}} MBps">
-                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.readRate/100 | number : 1}} / {{virtualmachine.writeRate/100 | number : 1}} <i class="fa fa-caret-down"></i> <small>MBps</small></small>
+                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.readRate/100 | round: 1}} MBps / {{virtualmachine.writeRate/100 | round: 1}} MBps">
+                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.readRate/100 | round: 1}} / {{virtualmachine.writeRate/100 | round: 1}} <i class="fa fa-caret-down"></i> <small>MBps</small></small>
                                 </td>
-                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.readPerSecond | number : 0}} / {{virtualmachine.writePerSecond | number : 0}}">
-                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.readPerSecond | number : 0}}/{{virtualmachine.writePerSecond | number : 0}} <i class="fa fa-caret-down"></i> <small>IOps</small></small>
+                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.readPerSecond | round: 0}} / {{virtualmachine.writePerSecond | round: 0}}">
+                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.readPerSecond | round: 0}}/{{virtualmachine.writePerSecond | round: 0}} <i class="fa fa-caret-down"></i> <small>IOps</small></small>
                                 </td>
-                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.readLatency | number : 0}} ms / {{virtualmachine.writeLatency | number : 0}} ms">
-                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.readLatency | number : 0}}/{{virtualmachine.writeLatency | number : 0}} <i class="fa fa-caret-down"></i> <small>ms</small></small>
+                                <td ng-if="virtualmachine.powerState != 'deleted'" title="{{virtualmachine.readLatency | round: 0}} ms / {{virtualmachine.writeLatency | round: 0}} ms">
+                                    <small><i class="fa fa-caret-up"></i> {{virtualmachine.readLatency | round: 0}}/{{virtualmachine.writeLatency | round: 0}} <i class="fa fa-caret-down"></i> <small>ms</small></small>
                                 </td>
                             </tr>
                         </tbody>

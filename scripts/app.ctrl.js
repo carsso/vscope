@@ -406,7 +406,17 @@
                     result['icon'] = 'fa-times';
                 }
             }
+            if($scope.isOvhVm(virtualmachine)) {
+                result['class'] = 'lightgrey';
+            }
             return result[type];
+        }
+
+        $scope.isOvhVm = function(virtualmachine) {
+            if(virtualmachine.name.match(/^backupServer[0-9]+$/)) {
+                return true;
+            }
+            return false;
         }
 
         $scope.getVirtualMachineBackupClass = function(virtualmachine) {
@@ -425,6 +435,9 @@
                 }
             } else {
                 resultClass = 'red';
+            }
+            if($scope.isOvhVm(virtualmachine)) {
+                resultClass = 'lightgrey';
             }
             return resultClass;
         }
